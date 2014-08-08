@@ -43,8 +43,8 @@ if __name__ == "__main__":
   for t in range(nTimeSteps):
     print "%s %s %s %s" % (t,int(indices[0]),int(indices[1]), numpy.max(u))
     uold = u.copy()
-    for i in range(1,nx-2):
-      for j in range(1,ny-2):
-        u[i][j] = uold[i][j] - cx*dt*(u[i][j]-u[i-1][j])/dx - cy*dt*(u[i][j]-u[i][j-1])/dy
-    indices = numpy.where( u == u.max() )
+    for i in range(1,nx-1):
+      for j in range(1,ny-1):
+        u[i][j] = uold[i][j] - cx*dt*(uold[i][j]-uold[i-1][j])/dx - cy*dt*(uold[i][j]-uold[i][j-1])/dy
+    indices = numpy.unravel_index(u.argmax(),u.shape);
   plottimestep(x,y,u)
